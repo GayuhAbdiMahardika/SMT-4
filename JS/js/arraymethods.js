@@ -24,6 +24,16 @@ nama.push('ani');
 // console.log(nama);
 
 
-nilai.filter((a) => 
-    a.ipa > 80 && a.mm > 80 ? console.log(a.nama) : null
-) 
+// nilai.filter((a) => 
+//     a.ipa > 80 && a.mm > 80 ? console.log(a.nama) : null
+// )
+
+// let siswa = nilai.map(a => [a.nama, a.bindo]);
+// console.log(siswa);
+
+// nama.sort()
+// console.log(nama);
+
+let hasil = nilai.reduce((a,b) => (a+=b.ipa), 0)
+
+console.log(hasil);
