@@ -21,12 +21,20 @@ class PelangganController extends Controller
 
     public function create(Request $request)
     {
-        Pelanggan::create($request->all());
-        return response()->json($request);
+        $this->validate($request, ['pelanggan'=>'required', 'alamat' =>'required', 'telp' => 'required|numeric']);
+
+        $response = Pelanggan::create($request->all());
+        return response()->json($response);
     }
 
     public function destroy($id){
         Pelanggan::where('idpelanggan',$id)->delete();
         return response()->json('deleted');
+    }
+
+    public function update($id, Request $request)
+    {
+        Pelanggan::where('idpelanggan',$id)->update($request->all());
+        return response()->json("updated");
     }
 }

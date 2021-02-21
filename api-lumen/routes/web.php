@@ -17,7 +17,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group( ['prefix'=>'api'], function () use ($router) {
+$router->post('api/register', ['uses'=>'LoginController@register'] );
+$router->post('api/login', ['uses'=>'LoginController@login'] );
+
+$router->group( ['prefix'=>'api', 'middleware'=>'auth'], function () use ($router) {
     $router->get('kategori', ['uses'=>'KategoriController@index'] );
     $router->get('kategori/{id}',['uses'=>'KategoriController@show'] );
     $router->delete('kategori/{id}',['uses'=>'KategoriController@destroy'] );
@@ -27,5 +30,13 @@ $router->group( ['prefix'=>'api'], function () use ($router) {
     $router->get('pelanggan',['uses'=>'PelangganController@index'] );
     $router->post('pelanggan',['uses'=>'PelangganController@create'] );
     $router->get('pelanggan/{id}',['uses'=>'PelangganController@show'] );
+    $router->put('pelanggan/{id}',['uses'=>'PelangganController@update'] );
     $router->delete('pelanggan/{id}',['uses'=>'PelangganController@destroy'] );
+
+    $router->get('menu',['uses'=>'MenuController@index'] );
+    $router->post('menu',['uses'=>'MenuController@create'] );
+    // $router->get('menu/{id}',['uses'=>'PelangganController@show'] );
+    // $router->put('menu/{id}',['uses'=>'PelangganController@update'] );
+    // $router->delete('menu/{id}',['uses'=>'PelangganController@destroy'] );
+
 });
