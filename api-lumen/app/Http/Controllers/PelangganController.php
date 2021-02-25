@@ -24,17 +24,42 @@ class PelangganController extends Controller
         $this->validate($request, ['pelanggan'=>'required', 'alamat' =>'required', 'telp' => 'required|numeric']);
 
         $response = Pelanggan::create($request->all());
-        return response()->json($response);
+
+        if($response){
+
+            return response()->json([
+                'pesan' => 'Data sudah dimasukkan',
+                'data' => $response
+            ]);
+        }
+
     }
 
     public function destroy($id){
-        Pelanggan::where('idpelanggan',$id)->delete();
-        return response()->json('deleted');
-    }
+        $pelanggan = Pelanggan::where('idpelanggan',$id)->delete();
 
+        if($pelanggan){
+
+            return response()->json([
+                'pesan' => 'Data sudah dihapus',
+                'data' => $pelanggan
+            ]);
+        }
+        
+        // return response()->json('deleted');
+    }
+    
     public function update($id, Request $request)
     {
-        Pelanggan::where('idpelanggan',$id)->update($request->all());
-        return response()->json("updated");
+        $pelanggan = Pelanggan::where('idpelanggan',$id)->update($request->all());
+        
+                if($pelanggan){
+        
+                    return response()->json([
+                        'pesan' => 'Data sudah diupdate',
+                        'status' => 201,
+                        'data' => $pelanggan
+                    ]);
+                }
     }
 }

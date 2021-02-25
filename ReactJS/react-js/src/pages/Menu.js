@@ -13,6 +13,7 @@ function Menu() {
       <div className="App">
         <h1>Menu</h1>
         <Tabel menus={menus} title={title}/>
+        <Tabel menus={menus.filter((v)=>v.idkategori==2)} title={'Menu Es'}/>
       </div>
     );
   }
